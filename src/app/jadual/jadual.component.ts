@@ -10,6 +10,7 @@ import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { BorangComponent } from '../borang/borang.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-jadual',
@@ -95,11 +96,19 @@ export class JadualComponent implements AfterViewInit, OnInit {
     });
   }
 
-  delete(id: number) {
-    this.soilService.delete(id).subscribe(
-      () => {
-        this.loadSoilPage();
-      }
-    );
+  deleteSoil(id: number, msg: string) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      // width: '250px',
+      data: { id: id, message: msg }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.soilService.delete(id).subscribe(
+          () => {
+            this.loadSoilPage();
+          }
+        );
+    });
   }
 }

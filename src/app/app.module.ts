@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     JadualComponent,
     PemukaComponent,
     PokokComponent,
-    LeretComponent
+    LeretComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
