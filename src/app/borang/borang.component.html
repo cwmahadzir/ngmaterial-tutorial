@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Soil Information</h2>
+<mat-dialog-content class="mat-typography">
+
+  <div [formGroup]="soilForm" novalidate class="basic-container">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input hidden formControlName="id">
+          <input matInput placeholder="Code" formControlName="code">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Description" formControlName="description">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Symbol" formControlName="symbol">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Category" formControlName="category">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
