@@ -12,7 +12,6 @@ export class BorangComponent implements OnInit {
   ngOnInit(): void {
     this.soilForm.patchValue({
       id: this.data.id,
-      code: this.data.code,
       description: this.data.description,
       symbol: this.data.symbol,
       category: this.data.category

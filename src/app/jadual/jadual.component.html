@@ -9,9 +9,6 @@
       </button>
     </div>
   </div>
-
-
-
   <mat-form-field>
     <input matInput placeholder="Search Soil" #input>
   </mat-form-field>
@@ -20,11 +17,11 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <mat-table class="full-width-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="code"
+  <mat-table class="full-width-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="id"
     matSortDirection="asc" matSortDisableClear>
-    <ng-container matColumnDef="code">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
-      <mat-cell *matCellDef="let soil">{{soil.code}}</mat-cell>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell *matCellDef="let soil">{{soil.id}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
@@ -45,23 +42,18 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell class="duration-cell" *matCellDef="let soil">
-
         <button mat-icon-button (click)="editSoil(soil)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="delete(soil.id)">
           <mat-icon>delete_forever</mat-icon>
         </button>
-
-
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-
   </mat-table>
-
 
   <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
 </div>

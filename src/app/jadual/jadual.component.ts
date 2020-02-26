@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SoilService } from './soil.service';
 import { Soil } from './soil';
 import { fromEvent, merge } from 'rxjs';
-import { debounce, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { BorangComponent } from '../borang/borang.component';
 
@@ -24,7 +24,7 @@ export class JadualComponent implements AfterViewInit, OnInit {
   dataSource: SoilDataSource;
   soil: Soil;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['code', 'description', 'symbol', 'category', 'action'];
+  displayedColumns = ['id', 'description', 'symbol', 'category', 'action'];
 
   constructor(private route: ActivatedRoute, private soilService: SoilService, public dialog: MatDialog) {
 
@@ -33,7 +33,7 @@ export class JadualComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.dataSource = new SoilDataSource(this.soilService);
     //this.soil = this.route.snapshot.data['soil'];
-    this.dataSource.loadSoil('', 'code', 'asc', 0, 10);
+    this.dataSource.loadSoil('', 'id', 'asc', 0, 10);
   }
 
   ngAfterViewInit() {
@@ -82,31 +82,23 @@ export class JadualComponent implements AfterViewInit, OnInit {
   editSoil(soil?: Soil) {
     const dialogRef = this.dialog.open(BorangComponent, {
       // width: '250px',
-      data: soil != null ? soil : { id: null, code: "0000", description: '', symbol: '', category: '' }
+      data: soil != null ? soil : { id: null, description: '', symbol: '', category: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.soilService.save(result)
-        // .pipe(
-        // catchError(() => of([])),
-        // finalize(() => this.loadingSubject.next(false))
-        // )
         .subscribe((data: Soil) => {
           console.log(data);
-          this.loadSoilPage()
-          // this.soilSubject.next(data.results);
-          //this.countSubject.next(data.count);
+          this.loadSoilPage();
         });
-      //console.log('The dialog was closed');
-      //this.animal = result;
     });
   }
 
   delete(id: number) {
     this.soilService.delete(id).subscribe(
       () => {
-        this.loadSoilPage()
+        this.loadSoilPage();
       }
     );
   }
